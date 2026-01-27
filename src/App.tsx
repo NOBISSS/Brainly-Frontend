@@ -11,6 +11,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import type{ AppDispatch } from "./redux/store";
 import { fetchCurrentUser } from "./redux/slices/userThunks";
+import DashboardV2 from "./pages/DashboardV2";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   // const dispatch=useDispatch<AppDispatch>();
@@ -26,7 +28,9 @@ function App() {
       
       <Route element={<ProtectedRoutes/>}>
         <Route path="/" element={<Navigate to="/dashboard" replace/>} /> 
+        <Route path="/admin/dashboard" element={<AdminDashboard/>} /> 
         <Route path="/dashboard" element={<Dashboard/>} /> 
+        <Route path="/dashboardV2" element={<DashboardV2/>} /> 
         
      </Route>
      {/*FALLBACK*/}
