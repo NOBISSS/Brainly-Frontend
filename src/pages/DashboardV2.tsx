@@ -9,7 +9,7 @@ import { deleteLink, type Link } from "@/redux/slices/linkSlice";
 
 import { Sidebar } from "@/components/Sidebar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
-import { LinkGrid } from "@/components/dashboard/LinkGrid";
+import LinkGrid from "@/components/dashboard/LinkGrid";
 import { CreateContentModalV2 } from "@/components/CreateContentModalV2";
 import { DeleteContentModal } from "@/components/DeleteContentModal";
 
@@ -27,7 +27,7 @@ export default function DashboardV2() {
     (state: RootState) => state.workspaces.selected || null
   );
 
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: RootState) => state.user.user);
 
   /* ---------------------------------------------------------------- */
   /* Local UI State (ONLY UI stuff lives here)                        */

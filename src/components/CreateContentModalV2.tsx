@@ -287,7 +287,7 @@ export function CreateContentModalV2({
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
 animate={{ opacity: 1, y: 0 }}
-transition={{ duration: 0.25 }}
+//transition={{ duration: 0.25 }}
                             style={thumbnail ? { backgroundImage: `url(${thumbnail || "https://images.unsplash.com/photo-1617791160505-6f00504e3519?w=500"})` } : undefined}
                             transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             className={`bg-white p-5 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 ease-in-out cursor-default bg-cover bg-center relative`}

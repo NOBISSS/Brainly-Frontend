@@ -27,7 +27,7 @@ export default function Dashboard() {
   const selectedWorkspace = useSelector(
     (state: RootState) => state.workspaces.selected || null
   );
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: RootState) => state.user.user);
 
   const [sidebarOpen, setSidebarOpen] = useState(false); // mobile sidebar
   const [modalOpen, setModalOpen] = useState(false);
@@ -174,7 +174,6 @@ export default function Dashboard() {
           ) : filteredContents && filteredContents.length > 0 ? (
             filteredContents.map((item) => {
               const { url, title, thumbnail, _id, createdBy, category } = item;
-              console.log(category);
               const { icon, bg } = getCategoryIcon(category);
               return (
                 <motion.div
@@ -214,7 +213,7 @@ export default function Dashboard() {
                     {createdBy && <div className="relative flex items-center gap-4">
                       <div className="group">
                         <img
-                          src={createdBy.avatar || DEFAULT_LOGO}
+                          src={createdBy?.avatar || DEFAULT_LOGO}
                           alt={createdBy?.name == user?.name ? "me" : createdBy?.name}
                           className="w-10 h-10 rounded-full border bg-center bg-clip-content object-center object-cover"
                         />

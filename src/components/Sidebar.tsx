@@ -29,7 +29,7 @@ interface SidebarProps {
 
 export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const dispatch = useDispatch<AppDispatch>();
-  const user=useSelector((store)=>store.user);
+  const user=useSelector((store)=>store.user.user);
   const name=user?.name || "User";
   const { list, loading } = useSelector(
     (state: RootState) => state.workspaces
@@ -143,7 +143,7 @@ export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
           )}
 
           <AnimatePresence>
-            {list.map((ws) => (
+            {list?.map((ws) => (
               <motion.div
                 key={ws._id}
                 layout

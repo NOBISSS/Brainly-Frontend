@@ -1,19 +1,28 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { fetchCurrentUser } from "./userThunks";
-interface UserState {
-  name: string | null;
-  email: string | null;
-  password: string | null;
+
+interface User {
+  name: string;
+  email: string ;
   gender: string | null;
+}
+
+interface UserState {
+ user:User | null;
   loading:boolean;
 }
+// interface UserState {
+//   name: string | null;
+//   email: string | null;
+//   password: string | null;
+//   gender: string | null;
+//   loading:boolean;
+// }
+
 
 
 const initialState:UserState={
-    name:null,
-    email:null,
-    password:null,
-    gender:null,
+    user:null,
     loading:false,
 }
 
@@ -22,16 +31,18 @@ const userSlice=createSlice({
     initialState,
     reducers:{
         setUserDetails(state,action){
-            state.name=action.payload.name;
-            state.email=action.payload.email;
-            state.password=action.payload.password;
-            state.gender=action.payload.gender;
+            console.log("STATE USER CALLED",state,action)
+            // state.name=action.payload.name;
+            // state.email=action.payload.email;
+            // state.password=action.payload.password;
+            // state.gender=action.payload.gender;
         },
         clearUserDetails(state){
-            state.name=null;
-            state.email=null;
-            state.gender=null;
-            state.password=null;
+            // state.name=null;
+            // state.email=null;
+            // state.gender=null;
+            // state.password=null;
+            state.user=null;
         }
     },
     extraReducers:(builder)=> {
@@ -40,13 +51,26 @@ const userSlice=createSlice({
             state.loading=true;
         })
         .addCase(fetchCurrentUser.fulfilled,(state,action)=>{
+            console.log(action.payload);
             state.loading=false;
-            state.name=action.payload.name;
-            state.email=action.payload.email;
-            state.gender=action.payload.gender;
+            if(!action.payload){
+                state.user=null;
+                return;
+            }
+
+            state.user={
+                name:action.payload.name,
+                email:action.payload.email,
+                gender:action.payload.gender
+            };
+
+            // state.name=action.payload.name;
+            // state.email=action.payload.email;
+            // state.gender=action.payload.gender;
         })
         .addCase(fetchCurrentUser.rejected,(state)=>{
             state.loading=false;
+            state.user=null;
         });
     },
 })

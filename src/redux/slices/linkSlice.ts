@@ -113,7 +113,7 @@ const linkSlice = createSlice({
                     if (!state.byWorkspace[wsId]) {
                         state.byWorkspace[wsId] = [];
                     }
-                    state.byWorkspace[wsId].unshift(link);
+                    state.byWorkspace[wsId] = [link, ...state.byWorkspace[wsId]];
                 } else {
                     state.personal.unshift(link);
                 }
