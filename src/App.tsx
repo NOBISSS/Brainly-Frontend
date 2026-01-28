@@ -13,6 +13,7 @@ import type{ AppDispatch } from "./redux/store";
 import { fetchCurrentUser } from "./redux/slices/userThunks";
 import DashboardV2 from "./pages/DashboardV2";
 import AdminDashboard from "./pages/AdminDashboard";
+import AuthRedirect from "./utils/AuthRedirect";
 
 function App() {
   // const dispatch=useDispatch<AppDispatch>();
@@ -33,8 +34,10 @@ function App() {
         <Route path="/dashboardV2" element={<DashboardV2/>} /> 
         
      </Route>
-     {/*FALLBACK*/}
-     <Route path="*" element={<Navigate to="/dashboard" replace/>}/>
+     {/* FALLBACK */}
+     {/* <Route path="*" element={<Navigate to="/dashboard" replace/>}/> */}
+     {/* Smart fallback */}
+    <Route path="*" element={<AuthRedirect />} />
     </Routes>
     <Toaster position="top-right"/>
   </BrowserRouter>

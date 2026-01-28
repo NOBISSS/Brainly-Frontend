@@ -1,51 +1,93 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react'
-import { Navigate, Outlet } from 'react-router-dom';
-import { BACKEND_URL } from '../config';
+// import axios from 'axios';
+// import { useEffect, useState } from 'react'
+// import { Navigate, Outlet } from 'react-router-dom';
+// import { BACKEND_URL } from '../config';
 
+import { BACKEND_URL } from "@/config";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+
+// export function ProtectedRoutes() {
+//     const [status, setStatus] = useState<"Loading" | "Authorized" | "Unauthorized">("Loading");
+//     //check user wheather it is exists or not
+//     useEffect(() => {
+//         const controller=new AbortController();
+//         const VerifyUser = async () => {
+//             try {
+//                 await axios.get(BACKEND_URL + "api/v1/users/profile", {
+//                     withCredentials: true,
+//                     signal:controller.signal,
+//                 });
+//                 setStatus("Authorized");
+//             } catch (err: any) {
+//                 console.error("Auth Verify Failed:", err?.response || err);
+//                 if(err.name==="CanceledError"){
+//                     return;
+//                 }
+
+//                 if (err.response?.status === 401) {
+//                     setStatus("Unauthorized");
+//                 } else {
+//                     setStatus("Unauthorized");
+//                 }
+//             }
+//         };
+//         VerifyUser();
+//         return ()=>controller.abort();
+//     }, [])
+
+//     //checking authentication
+//     if (status === "Loading") {
+//         return (
+//             <div className='min-h-screen flex items-center justify-center text-gray-500'>
+//                 Checking Authentication
+//             </div>
+//         );
+//     }
+
+//     //if not authorized
+//     if (status === "Unauthorized") {
+//         return <Navigate to="/signin" replace />
+//     }
+
+//     //if authorized
+//     return <Outlet />
+// }
 export function ProtectedRoutes() {
-    const [status, setStatus] = useState<"Loading" | "Authorized" | "Unauthorized">("Loading");
-    //check user wheather it is exists or not
-    useEffect(() => {
-        const controller=new AbortController();
-        const VerifyUser = async () => {
-            try {
-                await axios.get(BACKEND_URL + "api/v1/users/profile", {
-                    withCredentials: true,
-                    signal:controller.signal,
-                });
-                setStatus("Authorized");
-            } catch (err: any) {
-                console.error("Auth Verify Failed:", err?.response || err);
-                if(err.name==="CanceledError"){
-                    return;
-                }
+  const [status, setStatus] = useState<"loading" | "auth" | "noauth">("loading");
 
-                if (err.response?.status === 401) {
-                    setStatus("Unauthorized");
-                } else {
-                    setStatus("Unauthorized");
-                }
-            }
-        };
-        VerifyUser();
-        return ()=>controller.abort();
-    }, [])
+  useEffect(() => {
+    const controller = new AbortController();
 
-    //checking authentication
-    if (status === "Loading") {
-        return (
-            <div className='min-h-screen flex items-center justify-center text-gray-500'>
-                Checking Authentication
-            </div>
-        );
-    }
+    const verify = async () => {
+      try {
+        await axios.get(BACKEND_URL + "api/v1/users/profile", {
+          withCredentials: true,
+          signal: controller.signal,
+        });
 
-    //if not authorized
-    if (status === "Unauthorized") {
-        return <Navigate to="/signin" replace />
-    }
+        setStatus("auth");
+      } catch {
+        setStatus("noauth");
+      }
+    };
 
-    //if authorized
-    return <Outlet />
+    verify();
+    return () => controller.abort();
+  }, []);
+
+  if (status === "loading") {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-gray-500">
+        Checking authentication...
+      </div>
+    );
+  }
+
+  if (status === "noauth") {
+    return <Navigate to="/signin" replace />;
+  }
+
+  return <Outlet />;
 }
