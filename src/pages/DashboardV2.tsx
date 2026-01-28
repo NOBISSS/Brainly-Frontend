@@ -98,7 +98,7 @@ export default function DashboardV2() {
   }, [contents, selectedCategories]);
 
   const categories = useMemo(() => {
-    return [...new Set(contents.map((c: Link) => c.category))];
+    return [...new Set(contents?.map((c: Link) => c.category))];
   }, [contents]);
 
   /* ---------------------------------------------------------------- */

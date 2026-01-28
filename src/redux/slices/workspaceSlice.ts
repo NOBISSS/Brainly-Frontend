@@ -181,7 +181,7 @@ const workspaceSlice = createSlice({
             .addCase(addCollaborator.fulfilled, (state, action) => {
                 state.loading = false;
                 const updated = action.payload;
-                state.list = state.list.map((w) => w._id === updated._id ? updated : w);
+                state.list = state.list?.map((w) => w._id === updated._id ? updated : w);
                 if (state.selected?._id === updated._id) {
                     state.selected = updated;
                 }
@@ -199,7 +199,7 @@ const workspaceSlice = createSlice({
             .addCase(removeCollaborator.fulfilled, (state, action) => {
                 state.loading = false;
                 const updated = action.payload;
-                state.list = state.list.map((w) => w._id === updated._id ? updated : w);
+                state.list = state.list?.map((w) => w._id === updated._id ? updated : w);
                 if (state.selected?._id === updated._id) {
                     state.selected = updated;
                 }

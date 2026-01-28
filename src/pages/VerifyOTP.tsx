@@ -103,7 +103,7 @@ export function VerifyOTP() {
 
         {/* OTP boxes */}
         <div className="flex gap-3 mb-4">
-          {otp.map((digit, index) => (
+          {otp?.map((digit, index) => (
             <input
               key={index}
               ref={(el) => (inputRefs.current[index] = el)}

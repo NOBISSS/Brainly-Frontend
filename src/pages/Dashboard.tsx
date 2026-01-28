@@ -172,7 +172,7 @@ export default function Dashboard() {
           ) : error ? (
             <p className="text-center text-red-500 py-12 col-span-full">{error}</p>
           ) : filteredContents && filteredContents.length > 0 ? (
-            filteredContents.map((item) => {
+            filteredContents?.map((item) => {
               const { url, title, thumbnail, _id, createdBy, category } = item;
               console.log(category);
               const { icon, bg } = getCategoryIcon(category);

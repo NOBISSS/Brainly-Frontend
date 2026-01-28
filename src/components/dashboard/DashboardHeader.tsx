@@ -79,7 +79,7 @@ export function DashboardHeader({
           </button>
 
           {showFilter &&
-            categories.map((cat) => {
+            categories?.map((cat) => {
               const active = selectedCategories.includes(cat);
 
               return (

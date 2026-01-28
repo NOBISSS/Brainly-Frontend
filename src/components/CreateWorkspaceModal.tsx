@@ -142,7 +142,7 @@ export function CreateWorkspaceModal({
 
             {/* Display added collaborators */}
             <div className="mt-3 space-y-2 max-h-32 overflow-y-auto">
-              {collaborators.map((email, i) => (
+              {collaborators?.map((email, i) => (
                 <div
                   key={i}
                   className="flex justify-between items-center bg-gray-100 p-2 rounded"

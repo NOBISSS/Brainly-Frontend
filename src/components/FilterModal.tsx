@@ -30,7 +30,7 @@ export default function FilterModal({
         <h2 className="font-semibold mb-3 text-gray-800">Filter by Category</h2>
 
         <div className="space-y-2 max-h-60 overflow-y-auto">
-          {categories.map((cat) => (
+          {categories?.map((cat) => (
             <label
               key={cat}
               className="flex items-center gap-2 text-sm cursor-pointer"

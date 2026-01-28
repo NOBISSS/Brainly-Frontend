@@ -6,7 +6,7 @@ export function LinkGrid({ links, loading, error, onDelete, user }) {
 
   return (
     <div className="grid grid-cols-3 gap-6">
-      {links.map((item) => (
+      {links?.map((item) => (
         <LinkCard
           key={item._id}
           link={item}
