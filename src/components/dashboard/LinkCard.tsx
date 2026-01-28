@@ -71,7 +71,7 @@ export function LinkCard({ link, user, onDelete }: Props) {
 
             {/* Tooltip */}
             <div className="absolute bottom-full mb-1 hidden group-hover:block bg-black text-white text-xs px-2 py-1 rounded">
-              {createdBy.name === user.name ? "ME" : createdBy.name}
+              {createdBy?.name === user?.name ? "ME" : createdBy?.name}
             </div>
           </div>
         )}
