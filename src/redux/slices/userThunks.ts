@@ -5,11 +5,16 @@ import { BACKEND_URL } from "../../config";
 
 export const fetchCurrentUser = createAsyncThunk(
   "user/fetchCurrentUser",
-  async () => {
-    const res = await axios.get(BACKEND_URL+"api/v1/users/profile", {
-      withCredentials: true, // if using cookies
-    });
-    console.log("CALLED");
-    return res.data.data;
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await axios.get(BACKEND_URL+"api/v1/users/profile", {
+        withCredentials: true,
+      });
+
+      return res.data?.data || null; // ⭐ safe
+    } catch (err) {
+      return rejectWithValue(null);
+    }
   }
 );
+
