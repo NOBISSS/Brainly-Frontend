@@ -145,7 +145,7 @@ export function CreateContentModal({
               onChange={(e) => setSelectedWorkspace(e.target.value)}
             >
               <option value="">Select Workspace</option>
-              {workspace?.map((ws: any) => (
+              {workspace.map((ws: any) => (
                 <option key={ws._id} value={ws._id}>
                   {ws.name}
                 </option>

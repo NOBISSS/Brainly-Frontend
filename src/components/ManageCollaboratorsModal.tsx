@@ -58,7 +58,7 @@ export const ManageCollaboratorsModal = ({
 
               {workspace.members && workspace.members.length > 0 ? (
                 <ul className="divide-y divide-gray-200">
-                  {workspace?.members?.map((member) => 
+                  {workspace.members?.map((member) => 
                   
                   ( workspace.owner.email!==member.email && member.email!==userEmail && 
                     <li
