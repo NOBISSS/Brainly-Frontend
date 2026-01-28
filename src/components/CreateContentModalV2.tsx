@@ -223,7 +223,7 @@ export function CreateContentModalV2({
                             <SelectContent>
                                 <SelectGroup className="lowercase ">
                                     <SelectLabel>Types</SelectLabel>
-                                    {types?.map((type, index) => (
+                                    {types.map((type, index) => (
                                         <SelectItem key={index} value={type} className="capitalize">
                                             {type}
                                         </SelectItem>
@@ -247,7 +247,7 @@ export function CreateContentModalV2({
                             <SelectContent>
                                 <SelectGroup>
                                     <SelectLabel>Workspace</SelectLabel>
-                                    {workspace?.map((ws: any) => (
+                                    {workspace.map((ws: any) => (
                                         <SelectItem key={ws._id} value={ws._id}>{ws.name}</SelectItem>
                                     ))}
                                 </SelectGroup>

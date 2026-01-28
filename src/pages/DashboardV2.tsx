@@ -27,7 +27,7 @@ export default function DashboardV2() {
     (state: RootState) => state.workspaces.selected || null
   );
 
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: RootState) => state.user.user);
 
   /* ---------------------------------------------------------------- */
   /* Local UI State (ONLY UI stuff lives here)                        */
@@ -49,7 +49,7 @@ export default function DashboardV2() {
   /* ---------------------------------------------------------------- */
 
   const { contents, loading, error, refetch } = useContent(
-    selectedWorkspace?._id ?? null
+    selectedWorkspace._id ?? null
   );
 
   /* ---------------------------------------------------------------- */

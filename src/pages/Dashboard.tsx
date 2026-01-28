@@ -27,7 +27,7 @@ export default function Dashboard() {
   const selectedWorkspace = useSelector(
     (state: RootState) => state.workspaces.selected || null
   );
-  const user = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: RootState) => state.user.user);
 
   const [sidebarOpen, setSidebarOpen] = useState(false); // mobile sidebar
   const [modalOpen, setModalOpen] = useState(false);

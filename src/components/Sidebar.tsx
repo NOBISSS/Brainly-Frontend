@@ -29,8 +29,8 @@ interface SidebarProps {
 
 export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const dispatch = useDispatch<AppDispatch>();
-  const user=useSelector((store)=>store.user);
-  const name=user?.name || "User";
+  const user=useSelector((store)=>store.user.user);
+  //const name=user?.name || "User";
   
   const { list, loading } = useSelector(
     (state: RootState) => state.workspaces
@@ -85,7 +85,7 @@ export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   };
 
   const handleRemoveCollaborator = async (memberId: string) => {
-    if (!selectedWorkspace?._id) return;
+    if (!selectedWorkspace._id) return;
     try {
       await dispatch(
         removeCollaborator({
@@ -216,7 +216,7 @@ export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
           <div className="group relative circle w-[34px] h-[34px] bg-black rounded-full bg-gradient-to-t from-cyan-400 via-cyan-700 to-purple-700">
             <span className="absolute opacity-0 inset-x-0 group-hover:opacity-100 transition-opacity duration-300 bottom-px bg-gradient-to-r from-transparent via-black to-transparent h-[3px] w-4/5 mx-auto blur-sm"></span>
           </div>
-          <h1 className="text-xl ">Hello, {name}</h1>
+          <h1 className="text-xl ">Hello, {user.name}</h1>
         </div>
       </div>
     </div>
