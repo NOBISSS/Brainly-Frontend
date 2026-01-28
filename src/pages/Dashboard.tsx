@@ -215,14 +215,14 @@ export default function Dashboard() {
                       <div className="group">
                         <img
                           src={createdBy.avatar || DEFAULT_LOGO}
-                          alt={createdBy.name == user.name ? "me" : createdBy.name}
+                          alt={createdBy.name == user?.name ? "me" : createdBy.name}
                           className="w-10 h-10 rounded-full border bg-center bg-clip-content object-center object-cover"
                         />
                         <div className={`absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center ${bg}`}>
                           {icon}
                         </div>
                         <div className="absolute bottom-full mb-1 hidden group-hover:block bg-black text-white text-xs px-2 py-1 rounded">
-                          {createdBy.name == user.name ? "ME" : createdBy.name}
+                          {createdBy.name == user?.name ? "ME" : createdBy.name}
                         </div>
                       </div>
                     </div>
