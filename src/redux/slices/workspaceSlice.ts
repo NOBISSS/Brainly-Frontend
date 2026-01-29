@@ -68,6 +68,7 @@ export const deleteWorkspace = createAsyncThunk("workspace/delete", async (id: s
         })
         return id;
     } catch (error) {
+        console.log("CALLINGIN: ERROR::::",error);
         return rejectWithValue(error?.response?.data?.message || "Failed to delete Workspaces");
     }
 })

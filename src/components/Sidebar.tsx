@@ -21,7 +21,7 @@ import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { ManageCollaboratorsModal } from "./ManageCollaboratorsModal";
 import { fetchCurrentUser } from "../redux/slices/userThunks";
-
+import BrainlyLogo from "../assets/Brainly_Logo.png"
 interface SidebarProps {
   mobileOpen: boolean;
   onClose: () => void;
@@ -73,9 +73,10 @@ export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
       ).unwrap();
       toast.success(`Invite sent to ${email} for ${selectedWorkspace.name}`);
     } catch (error: any) {
+      console.log(error);
       toast.error(
         error?.response?.data?.message ||
-        error?.message ||
+        error?.message || error || 
         "Something went wrong"
       );
     } finally {
@@ -97,7 +98,7 @@ export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
       console.log(error);
       toast.error(
         error?.response?.data?.message ||
-        error?.message ||
+        error?.message || error ||
         "Something went wrong"
       );
     }
@@ -116,7 +117,8 @@ export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
       await dispatch(deleteWorkspace(workspaceId)).unwrap();
       toast.success(`"${workspaceName}" deleted successfully`);
     } catch (err) {
-      toast.error(`Failed to delete "${workspaceName}"`);
+      console.log("ERROR WHILE DELETE::",err);
+      toast.error(err || "Failed to Delete Workspace");
     }
   };
 
@@ -127,7 +129,7 @@ export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
         <div className="flex items-center gap-2 mt-3 pl-2">
           <img className="w-10 h-10" src={Brain} alt="Brainly Logo" />
           <h1 className="text-purple-600 text-3xl font-extrabold tracking-tight">
-            Brainly
+        Brainly
           </h1>
         </div>
 
@@ -137,7 +139,8 @@ export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
         </div>
 
         {/* Workspace List */}
-        <div className="mt-4 space-y-2 relative flex-1 overflow-y-auto pr-1">
+        <div className="mt-4 space-y-2 relative max-h-[60vh] overflow-y-auto scrollbar-thin scroll-smooth
+ pr-1 hover:scrollbar-thumb-purple-400">
           {loading && (
             <p className="text-gray-400 text-sm">Loading workspaces...</p>
           )}
@@ -248,7 +251,7 @@ export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
       </AnimatePresence>
 
       {/* Desktop sidebar */}
-      <div className="hidden md:flex h-screen bg-white py-4 px-2 w-72 fixed left-0 top-0 z-40 bg-gradient-to-r from-gray-100 to-white">
+      <div className="hidden md:flex h-screen bg-white py-4 px-2 w-64 lg:w-72 fixed left-0 top-0 z-40 bg-gradient-to-r from-gray-100 to-white">
         {sidebarBody}
       </div>
 

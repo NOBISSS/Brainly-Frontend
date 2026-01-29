@@ -73,7 +73,7 @@ export default function DashboardV2() {
       setLinkToDelete(null);
       refetch();
     } catch (err: any) {
-      toast.error(err?.message || "Delete failed");
+      toast.error(err || "Delete failed");
     }
   };
 

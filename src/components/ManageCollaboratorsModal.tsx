@@ -54,6 +54,10 @@ export const ManageCollaboratorsModal = ({
                 <button onClick={onClose}>
                   <X size={20} className="text-gray-500 hover:text-gray-700" />
                 </button>
+                
+              </div>
+              <div>
+                <h1 className="text-lg font-semibold text-red-600">Owner:<span className="text-black">{workspace.owner.name}</span></h1>
               </div>
 
               {workspace.members && workspace.members.length > 0 ? (
