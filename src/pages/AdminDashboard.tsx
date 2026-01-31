@@ -12,6 +12,7 @@ import {
   Link as LinkIcon,
   TrendingUp
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Stats {
   users: number;
@@ -22,6 +23,7 @@ interface Stats {
 }
 
 export default function AdminDashboard() {
+  const navigate=useNavigate();
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -36,6 +38,7 @@ export default function AdminDashboard() {
         console.log(res.data.data);
       } catch (err) {
         console.log(err);
+        navigate("/dashboard");
       } finally {
         setLoading(false);
       }

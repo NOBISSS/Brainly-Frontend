@@ -47,7 +47,6 @@ export function CreateContentModalV2({
     const workspaceRef = useRef<HTMLSelectElement>(null);
     const dispatch = useDispatch();
     const SelectedWorkspace = useSelector((state) => state.workspaces?.selected) || "";
-    console.log("SELECTED WORKSPACE::", SelectedWorkspace);
     const fetchOGPreview = async (url: string) => {
         if (!url) return;
 
@@ -86,31 +85,6 @@ export function CreateContentModalV2({
         }
     };
 
-
-    //   const createLink = () => {
-    //   const title = titleRef.current?.value;
-    //   const link = linkRef.current?.value;
-    //   const type = selectedType || detectLinkType(link || "");
-    //   const workspaceId = selectedWorkspace;
-
-    //   if (!title || !link || !type || !workspaceId) {
-    //     toast.error("Please fill all required details");
-    //     return;
-    //   }
-
-    //   dispatch(
-    //     addLink({
-    //       title,
-    //       url: link,
-    //       category: type,
-    //       workspace: workspaceId,
-    //     })
-    //   );
-
-    //   toast.success("Link created successfully");
-    //   onSuccess?.();
-    //   onClose();
-    // };
     const createLink = () => {
         if (!selectedWorkspace) {
             toast.error("Choose a workspace first");
@@ -118,7 +92,6 @@ export function CreateContentModalV2({
             return;
         }
         if (!link || !selectedWorkspace) {
-            console.log(link, selectedWorkspace);
             toast.error("Please Fill All Required Details")
             return;
         }
@@ -164,7 +137,6 @@ export function CreateContentModalV2({
         const fetchWorkspaces = async () => {
             try {
                 const workspacesData = await dispatch(FetchWorkspacesThunk()).unwrap();
-                console.log(workspacesData)
                 setWorkspaces(workspacesData);
             } catch (error) {
                 console.log("Failed to Fetch Workspaces", error);
@@ -200,23 +172,12 @@ export function CreateContentModalV2({
                     {/* Inputs */}
                     <div className="space-y-3 flex flex-col">
                         <Input value={link} placeholder="Paste Link here"
-                            // onPaste={(e)=>{
-                            //     const pasted=e.clipboardData.getData("text");
-                            //     if(!pasted) return;
-                            //     processLink(pasted);
-                            //     //small delay so ui update first
-                            //     setTimeout(()=>fetchOGPreview(value),200)
-                            // }}
                             onChange={(e) => processLink(e.target.value)}
-                        //onBlur={() => fetchOGPreview(link)}
                         />
-
-
                         {/* Type Selection */}
                         <Select
                             value={selectedType}
                             onValueChange={(e) => {
-                                console.log("E::", e);
                                 setSelectedType(e);
                                 setIsAutoType(false);
                             }}
@@ -277,21 +238,7 @@ export function CreateContentModalV2({
                         </motion.div>
                     )
                     }
-                    {/* {
-                        thumbnail && (
-                            <div className="flex gap-3 border rounded-lg p-2 mt-2">
-                                <img
-                                    src={thumbnail}
-                                    className="w-16 h-16 object-cover rounded"
-                                    alt="preview"
-                                />
-                                <div>
-                                    <p className="font-semibold line-clamp-2">{title}</p>
-                                    <p className="text-xs text-gray-400 uppercase">{selectedType}</p>
-                                </div>
-                            </div>
-                        )
-                    } */}
+
                     {thumbnail && (
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}

@@ -12,7 +12,7 @@ export function VerifyOTP() {
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-    const {name,email,password,gender}=useSelector((state:RootState)=>state.user);
+    const {name,email,password,gender}=useSelector((state:RootState)=>state.user.user);
     console.log(name,email,password,gender);
   // refs for each OTP box
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
