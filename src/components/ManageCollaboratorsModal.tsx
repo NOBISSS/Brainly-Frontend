@@ -19,7 +19,7 @@ export const ManageCollaboratorsModal = ({
 }: ManageCollaboratorsModalProps) => {
 
   const handleRemove = (memberId: string, email: string) => {
-    console.log("O M:",memberId);
+    //console.log("O M:",memberId);
     if (confirm(`Remove ${email} from ${workspace.name}?`)) {
       onRemove(memberId);
     }

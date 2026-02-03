@@ -7,6 +7,7 @@ import "./App.css";
 import { ProtectedRoutes } from "./utils/ProtectedRoutes";
 import { VerifyOTP } from "./pages/VerifyOTP";
 import { ThemeProvider } from "./context/ThemeContext";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import type{ AppDispatch } from "./redux/store";
@@ -38,6 +39,7 @@ function App() {
     </Routes>
     <Toaster position="top-right"/>
   </BrowserRouter>
+  <SpeedInsights/>
   </ThemeProvider>
 }
 

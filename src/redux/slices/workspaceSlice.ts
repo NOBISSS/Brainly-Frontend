@@ -47,7 +47,6 @@ export const fetchWorkspaces = createAsyncThunk("workspaces/fetchAll", async (_,
 
 //Create Workspace
 export const createWorkspace = createAsyncThunk("workspaces/create", async ({ name, description }: { name: string, description: string }, { rejectWithValue }) => {
-    console.log(name, description);
     try {
         const res = await axios.post(`${BACKEND_URL}api/workspaces`, { name, description }, {
             withCredentials: true

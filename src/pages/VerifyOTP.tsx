@@ -13,7 +13,6 @@ export function VerifyOTP() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
     const {name,email,password,gender}=useSelector((state:RootState)=>state.user.user);
-    console.log(name,email,password,gender);
   // refs for each OTP box
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
@@ -76,7 +75,7 @@ export function VerifyOTP() {
         gender,
         otp: code,
       });
-      console.log("OTP VERIFY RESPONSE:: ", res.data);
+      //console.log("OTP VERIFY RESPONSE:: ", res.data);
       // on success -> redirect to dashboard or signin
       toast.success("Signup Verified Successfully");
       navigate("/dashboard"); // or "/signin" depending on your flow

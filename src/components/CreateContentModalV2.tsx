@@ -61,7 +61,7 @@ export function CreateContentModalV2({
 
         try {
             const res = await axios.get(BACKEND_URL + `api/links/preview?url=${url}`, { withCredentials: true });
-            console.log(res);
+            //console.log(res);
             if (res.data.title && !title) setTitle(res.data.title);
             if (res.data.thumbnail && !thumbnail) setThumbnail(res.data.thumbnail);
         } catch (error) {
