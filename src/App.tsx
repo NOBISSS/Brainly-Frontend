@@ -1,5 +1,4 @@
 import { Toaster } from "react-hot-toast";
-import Dashboard from "./pages/Dashboard";
 import { Signin } from "./pages/Signin";
 import { Signup } from "./pages/Signup";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -7,11 +6,8 @@ import "./App.css";
 import { ProtectedRoutes } from "./utils/ProtectedRoutes";
 import { VerifyOTP } from "./pages/VerifyOTP";
 import { ThemeProvider } from "./context/ThemeContext";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import type{ AppDispatch } from "./redux/store";
-import { fetchCurrentUser } from "./redux/slices/userThunks";
+import { SpeedInsights } from '@vercel/speed-insights/react'
+
 import DashboardV2 from "./pages/DashboardV2";
 import AdminDashboard from "./pages/AdminDashboard";
 
