@@ -10,6 +10,12 @@ import { SpeedInsights } from '@vercel/speed-insights/react'
 
 import DashboardV2 from "./pages/DashboardV2";
 import AdminDashboard from "./pages/AdminDashboard";
+import { lazy, Suspense } from "react";
+
+const SpeedInsights = lazy(() =>
+  import("@vercel/speed-insights/react").then(m => ({ default: m.SpeedInsights }))
+);
+
 
 function App() {
   // const dispatch=useDispatch<AppDispatch>();
@@ -18,6 +24,9 @@ function App() {
 
   // },[dispatch])
   return <ThemeProvider><BrowserRouter>
+  <Suspense>
+    <SpeedInsights/>
+  </Suspense>
     <Routes>
       <Route path="/signup" element={<Signup/>} />
       <Route path="/signin" element={<Signin/>} />
@@ -35,7 +44,6 @@ function App() {
     </Routes>
     <Toaster position="top-right"/>
   </BrowserRouter>
-  <SpeedInsights/>
   </ThemeProvider>
 }
 
