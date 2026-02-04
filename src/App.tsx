@@ -6,7 +6,6 @@ import "./App.css";
 import { ProtectedRoutes } from "./utils/ProtectedRoutes";
 import { VerifyOTP } from "./pages/VerifyOTP";
 import { ThemeProvider } from "./context/ThemeContext";
-import { SpeedInsights } from '@vercel/speed-insights/react'
 
 import DashboardV2 from "./pages/DashboardV2";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -18,11 +17,6 @@ const SpeedInsights = lazy(() =>
 
 
 function App() {
-  // const dispatch=useDispatch<AppDispatch>();
-  // useEffect(()=>{
-  //   dispatch(fetchCurrentUser());
-
-  // },[dispatch])
   return <ThemeProvider><BrowserRouter>
   <Suspense>
     <SpeedInsights/>
@@ -36,7 +30,6 @@ function App() {
         <Route path="/" element={<Navigate to="/dashboard" replace/>} /> 
         <Route path="/admin/dashboard" element={<AdminDashboard/>} /> 
         <Route path="/dashboard" element={<DashboardV2/>} /> 
-        {/* <Route path="/dashboardV2" element={<DashboardV2/>} />  */}
         
      </Route>
      {/*FALLBACK*/}

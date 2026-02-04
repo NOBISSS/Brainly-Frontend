@@ -2,6 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import { fetchCurrentUser } from "./userThunks";
 
 interface User {
+    _id?:string;
     name: string;
     email: string;
     gender: string | null;
@@ -62,9 +63,11 @@ const userSlice = createSlice({
                 }
 
                 state.user = {
+                    _id:action.payload._id,
                     name: action.payload.name,
                     email: action.payload.email,
-                    gender: action.payload.gender
+                    gender: action.payload.gender,
+                    password:null
                 };
 
                 // state.name=action.payload.name;

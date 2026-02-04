@@ -1,3 +1,4 @@
+//src/components/ManageCollaboratorsModal.tsx
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Trash2 } from "lucide-react";
 import { Workspace } from "../redux/slices/workspaceSlice";

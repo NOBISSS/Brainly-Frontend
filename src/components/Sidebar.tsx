@@ -4,6 +4,13 @@ import { SidebarItem } from "./SidebarItem";
 import Brain from "../assets/brain.svg";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../redux/store";
+import {
+  socketWorkspaceCreated,
+  socketMemberAdded,
+  socketMemberRemoved,
+  socketWorkspaceDeleted
+} from "../redux/slices/workspaceSlice";
+import {socket} from "../socket/socket";
 import { HiArrowTurnRightDown } from "react-icons/hi2";
 import {
   fetchWorkspaces,
@@ -45,10 +52,39 @@ export function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   );
   const [removeCollaborators, setRemoveCollaborators] = useState(false);
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   dispatch(fetchWorkspaces());
+  //   dispatch(fetchCurrentUser());
+  // }, [dispatch]);
+  useEffect(()=>{
+socket.on("connect", () => {
+  console.log("🟢 socket connected", socket.id);
+});
+  },[]) 
+
+  useEffect(()=>{
     dispatch(fetchWorkspaces());
     dispatch(fetchCurrentUser());
-  }, [dispatch]);
+
+    socket.on("connect", () => {
+  console.log("🟢 socket connected", socket.id);
+});
+
+
+    socket.on("workspaceCreated",(workspace:Workspace)=>{
+      dispatch(socketWorkspaceCreated(workspace));
+    });
+
+    socket.on("workspaceDeleted",(id:string)=>{
+      dispatch(socketWorkspaceDeleted(id));
+    });
+    return ()=>{
+      socket.off("workspaceCreated");
+      socket.off("workspaceDeleted");
+      socket.off("memberAdded");
+      socket.off("memberRemoved");
+    }
+  },[dispatch])
 
   const handleWorkspaceClick = (workspace: Workspace) => {
     const workspaceId = workspace._id;
