@@ -10,6 +10,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import DashboardV2 from "./pages/DashboardV2";
 import AdminDashboard from "./pages/AdminDashboard";
 import { lazy, Suspense } from "react";
+import HomePage from "./components/home/HomePage";
 
 const SpeedInsights = lazy(() =>
   import("@vercel/speed-insights/react").then(m => ({ default: m.SpeedInsights }))
@@ -22,6 +23,7 @@ function App() {
     <SpeedInsights/>
   </Suspense>
     <Routes>
+      <Route path="/" element={<HomePage/>} />
       <Route path="/signup" element={<Signup/>} />
       <Route path="/signin" element={<Signin/>} />
       <Route path="/verify-otp" element={<VerifyOTP/>} />
