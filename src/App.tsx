@@ -28,7 +28,8 @@ function App() {
       <Route path="/signup" element={<Signup/>} />
       <Route path="/signin" element={<Signin/>} />
       <Route path="/verify-otp" element={<VerifyOTP/>} />
-      <Route path="/forgotpassword" element={<ForgotPasswordForm/>} />
+      {/*Forgot Password Under Testing */}
+      <Route path="/test/forgotpassword" element={<ForgotPasswordForm/>} />
       
       <Route element={<ProtectedRoutes/>}>
         <Route path="/" element={<Navigate to="/dashboard" replace/>} /> 
