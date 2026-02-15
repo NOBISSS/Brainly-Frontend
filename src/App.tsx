@@ -11,6 +11,7 @@ import DashboardV2 from "./pages/DashboardV2";
 import AdminDashboard from "./pages/AdminDashboard";
 import { lazy, Suspense } from "react";
 import HomePage from "./components/home/HomePage";
+import { ForgotPasswordForm } from "./components/ForgotPassword";
 
 const SpeedInsights = lazy(() =>
   import("@vercel/speed-insights/react").then(m => ({ default: m.SpeedInsights }))
@@ -27,6 +28,7 @@ function App() {
       <Route path="/signup" element={<Signup/>} />
       <Route path="/signin" element={<Signin/>} />
       <Route path="/verify-otp" element={<VerifyOTP/>} />
+      <Route path="/forgotpassword" element={<ForgotPasswordForm/>} />
       
       <Route element={<ProtectedRoutes/>}>
         <Route path="/" element={<Navigate to="/dashboard" replace/>} /> 
