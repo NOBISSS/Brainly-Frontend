@@ -5,6 +5,8 @@ import { Label } from './ui/label'
 import { CloudBackground } from './cloud-background'
 import { Mail, ArrowLeft, CheckCircle2, Lock } from 'lucide-react'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from './ui/input-otp'
+import { api } from '@/api/axios'
+import { useNavigate } from 'react-router-dom'
 
 type Step = 'email' | 'otp' | 'password' | 'success'
 
@@ -16,16 +18,17 @@ export function ForgotPasswordForm() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
-
+  const navigate=useNavigate();
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     setIsLoading(true)
 
     // Simulate API call
-    setTimeout(() => {
+    setTimeout(async () => {
       if (email) {
         setStep('otp')
+        await api.post("api/v1/users/sendotp",{ email,type:"forgot" });
       } else {
         setError('Please enter a valid email')
       }
@@ -39,9 +42,22 @@ export function ForgotPasswordForm() {
     setIsLoading(true)
 
     // Simulate API call
-    setTimeout(() => {
+    setTimeout(async () => {
       if (otp.length === 6) {
-        setStep('password')
+        try{
+        const res=await api.post("api/v1/users/verify-otp",{
+          email,
+          otp,
+          type:"forgot"
+        });
+        localStorage.setItem("resetToken",res.data.resetToken);
+        setStep('password');
+      }catch(error){
+        setError('Please enter a valid OTP')
+        console.log("Error:"+error);
+        return;
+      }
+
       } else {
         setError('Please enter a valid OTP')
       }
@@ -55,9 +71,19 @@ export function ForgotPasswordForm() {
     setIsLoading(true)
 
     // Simulate API call
-    setTimeout(() => {
+    setTimeout(async() => {
       if (password && password === confirmPassword && password.length >= 8) {
-        setStep('success')
+        try{
+          await api.post("api/v1/users/reset-password",{
+            email,
+            newPassword:password,
+            confirmPassword,
+            resetToken:localStorage.getItem("resetToken")
+          })
+          setStep('success')
+        }catch(error){
+          console.log("Error:"+error);
+        }
       } else if (password !== confirmPassword) {
         setError('Passwords do not match')
       } else if (password.length < 8) {
@@ -74,6 +100,7 @@ export function ForgotPasswordForm() {
     setPassword('')
     setConfirmPassword('')
     setError('')
+    navigate("/signin");
   }
 
   return (
