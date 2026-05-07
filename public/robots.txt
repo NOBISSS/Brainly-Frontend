@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Allow: /signup
+Allow: /login
+
+# Block authenticated/private pages from indexing
+Disallow: /dashboard
+Disallow: /dashboard/*
+Disallow: /api/
+
+Sitemap: https://second-brainly-jet.vercel.app/sitemap.xml
