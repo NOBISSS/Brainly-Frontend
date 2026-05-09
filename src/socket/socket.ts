@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 
 const SOCKET_URL = location.hostname=="localhost"
 ? "http://localhost:3000"
-: "http://13.62.231.216";  // ✅ direct to VPS through Nginx, bypasses Vercel
+: "https://13-62-231-216.nip.io";  // ✅ direct to VPS through Nginx, bypasses Vercel
 
 export const socket = io(SOCKET_URL, {
     withCredentials: true,
